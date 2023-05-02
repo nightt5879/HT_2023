@@ -50,6 +50,7 @@ void bttery_level(uint8_t led_num)
 		{
 			GPIO_SetOutBits(HT_GPIOB, GPIO_PIN_4|GPIO_PIN_5); 
 			GPIO_SetOutBits(HT_GPIOA, GPIO_PIN_7);
+			GPIO_ClearOutBits(HT_GPIOB, GPIO_PIN_6);
 			
 			GPIO_SetOutBits(HT_GPIOA, GPIO_PIN_7);
 			GPIO_ClearOutBits(HT_GPIOA, GPIO_PIN_6);

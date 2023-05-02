@@ -31,7 +31,9 @@
 //-----------------------------------------------------------------------------
 #define UART0_BUF_SIZE 256
 #define UART0_FIFO_LEN 1
-
+#define ERR_SERIAL 0
+#define FACE_SUCCESS 1
+#define FACE_FAILURE 2
 //-----------------------------------------------------------------------------
 typedef struct
 {
@@ -44,7 +46,7 @@ typedef struct
 //-----------------------------------------------------------------------------
 void UART0_Configuration(void);
 void UART0_init_buffer (void);
-void UART0_analyze_data(void);
+unsigned char UART0_analyze_data(void);
 void UART0_tx_data(u8 *pt, u8 len);
 void UART0_test(void);
 

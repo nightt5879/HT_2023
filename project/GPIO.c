@@ -71,8 +71,8 @@ void GPIO_Configuration(void)
   GPIO_ClearOutBits       (OUT_PB2_GPIO_PORT, OUT_PB2_GPIO_PIN);
   GPIO_DirectionConfig    (OUT_PB2_GPIO_PORT, OUT_PB2_GPIO_PIN, GPIO_DIR_OUT);
 
-  GPIO_ClearOutBits       (OUT_PB3_GPIO_PORT, OUT_PB3_GPIO_PIN);
-  GPIO_DirectionConfig    (OUT_PB3_GPIO_PORT, OUT_PB3_GPIO_PIN, GPIO_DIR_OUT);
+//  GPIO_ClearOutBits       (OUT_PB3_GPIO_PORT, OUT_PB3_GPIO_PIN);
+//  GPIO_DirectionConfig    (OUT_PB3_GPIO_PORT, OUT_PB3_GPIO_PIN, GPIO_DIR_OUT);
 
   GPIO_ClearOutBits       (OUT_PB4_GPIO_PORT, OUT_PB4_GPIO_PIN);
   GPIO_DirectionConfig    (OUT_PB4_GPIO_PORT, OUT_PB4_GPIO_PIN, GPIO_DIR_OUT);
@@ -92,7 +92,10 @@ void GPIO_Configuration(void)
   GPIO_ClearOutBits       (OUT_PC13_GPIO_PORT, OUT_PC13_GPIO_PIN);
   GPIO_InputConfig		  (OUT_PC13_GPIO_PORT,OUT_PC13_GPIO_PIN, ENABLE);
   GPIO_DirectionConfig    (OUT_PC13_GPIO_PORT, OUT_PC13_GPIO_PIN, GPIO_DIR_IN);
-  
+
+  GPIO_ClearOutBits       (OUT_PB3_GPIO_PORT, OUT_PB3_GPIO_PIN);
+  GPIO_InputConfig		  (OUT_PB3_GPIO_PORT,OUT_PB3_GPIO_PIN, ENABLE);
+  GPIO_DirectionConfig    (OUT_PB3_GPIO_PORT, OUT_PB3_GPIO_PIN, GPIO_DIR_IN);
 }
 
 //-----------------------------------------------------------------------------

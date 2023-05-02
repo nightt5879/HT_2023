@@ -101,26 +101,47 @@ void UART0_IRQHandler(void)
 }
 
 //-----------------------------------------------------------------------------
-void UART0_analyze_data(void)
+unsigned char UART0_analyze_data(void)
 {
-  u8 tmp;
-  if(!rxd_comm0.cnt)
-    return;
+	u8 pos = rxd_comm0.read_pt;
+	if (rxd_comm0.cnt < 4) //  If less than four bytes, it is not necessary.
+		return ERR_SERIAL;
 
-  //...to be add
-  tmp = rxd_comm0.buffer[rxd_comm0.read_pt];
-  if( (tmp != 0xAA) )            //for example
+  // 0x00, 0x00, 0x01, 0x02
+
+  if (rxd_comm0.buffer[pos] == 0x00 && 
+      rxd_comm0.buffer[(pos + 1) % UART0_BUF_SIZE] == 0x03 &&
+      rxd_comm0.buffer[(pos + 2) % UART0_BUF_SIZE] == 0x01 && //face detect success
+      rxd_comm0.buffer[(pos + 3) % UART0_BUF_SIZE] == 0x00)
   {
+
+    // Update the reading position and counter of the receive buffer.
     NVIC_DisableIRQ(UART0_IRQn);
-    rxd_comm0.cnt--;  //throw invalid data
+    rxd_comm0.read_pt = (rxd_comm0.read_pt + 4) % UART0_BUF_SIZE;
+    rxd_comm0.cnt -= 4;
     NVIC_EnableIRQ(UART0_IRQn);
-    rxd_comm0.read_pt = (rxd_comm0.read_pt + 1) % UART0_BUF_SIZE;
-    return;
+		return FACE_SUCCESS;
   }
-  else if(rxd_comm0.cnt >= 8)    //for example
+   else if (rxd_comm0.buffer[pos] == 0x00 && 
+      rxd_comm0.buffer[(pos + 1) % UART0_BUF_SIZE] == 0x03 &&
+      rxd_comm0.buffer[(pos + 2) % UART0_BUF_SIZE] == 0x00 && //face detect failure
+      rxd_comm0.buffer[(pos + 3) % UART0_BUF_SIZE] == 0x00)
   {
-    //add your code here
-
+    // Update the reading position and counter of the receive buffer.
+    NVIC_DisableIRQ(UART0_IRQn);
+    rxd_comm0.read_pt = (rxd_comm0.read_pt + 4) % UART0_BUF_SIZE;
+    rxd_comm0.cnt -= 4;
+    NVIC_EnableIRQ(UART0_IRQn);
+		return FACE_FAILURE;
+  }
+  else
+  {
+    // If the received byte does not meet the requirements, increase the reading position by 1 and discard one byte
+    NVIC_DisableIRQ(UART0_IRQn);
+    rxd_comm0.read_pt = (rxd_comm0.read_pt + 1) % UART0_BUF_SIZE;
+    rxd_comm0.cnt--;
+    NVIC_EnableIRQ(UART0_IRQn);
+	return ERR_SERIAL;
   }
 }
 
