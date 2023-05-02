@@ -1,0 +1,86 @@
+/*----------------------------------------------------------------------------------------------------------*/
+/* Holtek Semiconductor Inc.                                                                                */
+/*                                                                                                          */
+/* Copyright (c) Holtek Semiconductor Inc.                                                                  */
+/* All rights reserved.                                                                                     */
+/*                                                                                                          */
+/*------------------------------------------------------------------------------------------------------------
+  File Name        : HT32_TinyProgrammerMakerIII.txt
+  Version          : V1.15
+  Date             : 2017-10-31
+  Description      : Release notes of Holtek HT32 TinyProgrammer Maker III.
+------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------*/
+/* Holtek HT32 TinyProgrammer Maker III - Version 1.15                                                      */
+/*----------------------------------------------------------------------------------------------------------*/
+  Release Date: 2017-10-31
+    1. Update AP2.exe, fix "Image format invalid!" message when user make a Digital Signature
+       on the IAP exe file. (AP2.exe: v2.0.3)
+
+/*----------------------------------------------------------------------------------------------------------*/
+/* Holtek HT32 TinyProgrammer Maker III - Version 1.14                                                      */
+/*----------------------------------------------------------------------------------------------------------*/
+  Release Date: 2016-12-10
+    1. Fix Windows XP not work issue.
+    2. Reduce exe size.
+
+/*----------------------------------------------------------------------------------------------------------*/
+/* Holtek HT32 TinyProgrammer Maker III - Version 1.13                                                      */
+/*----------------------------------------------------------------------------------------------------------*/
+  Release Date: 2016-12-06
+    1. Fix miss MFC DLL issue.
+
+  Note: Unicode version did not support Windows XP.
+
+/*----------------------------------------------------------------------------------------------------------*/
+/* Holtek HT32 TinyProgrammer Maker III - Version 1.12                                                      */
+/*----------------------------------------------------------------------------------------------------------*/
+  Release Date: 2016-11-18
+    1. Fix Flash Digest error issue.
+    2. Add silent mode of AP2.exe.
+    3. Fix Flash Digest and Command key setting can't save problem.
+
+/*----------------------------------------------------------------------------------------------------------*/
+/* Holtek HT32 TinyProgrammer Maker III - Version 1.11                                                      */
+/*----------------------------------------------------------------------------------------------------------*/
+  Release Date: 2016-10-10
+    1. Fix chip size calculation.
+    2. Fix tab order
+    3. Change UI layout.
+
+/*----------------------------------------------------------------------------------------------------------*/
+/* Holtek HT32 TinyProgrammer Maker III - Version 1.10                                                      */
+/*----------------------------------------------------------------------------------------------------------*/
+  Release Date: 2016-10-04
+    1. Unicode version.
+
+/*----------------------------------------------------------------------------------------------------------*/
+/* Holtek HT32 TinyProgrammer Maker III - Version 1.00c                                                     */
+/*----------------------------------------------------------------------------------------------------------*/
+  Release Date: 2016-09-21
+    1. Fix connect problem (Output Report ID error, byte0).
+
+/*----------------------------------------------------------------------------------------------------------*/
+/* Holtek HT32 TinyProgrammer Maker III - Version 1.00b                                                     */
+/*----------------------------------------------------------------------------------------------------------*/
+  Release Date: 2016-09-08
+    1. Improve the stability of the USB connect operation.
+    2. Fix disable bug of Flash Digest and Comamnd Key checkbox function.
+
+/*----------------------------------------------------------------------------------------------------------*/
+/* Holtek HT32 TinyProgrammer Maker III - Version 1.00                                                      */
+/*----------------------------------------------------------------------------------------------------------*/
+  Release Date: 2015-11-10
+
+  HT32 TinyProgrammer Maker III is a PC-Based graph user interface for generate single EXE file which
+  including TinyProgrammer III and application image. The TinyProgrammer III communicates with ISP/IAP
+  firmware via USB interface and then uses the pre-define protocol/commands to apply flash operations.
+
+    Path:                                                  Descriptions:
+    ----------------------------------------------------------------------------------------------------------
+    {INSTALL_PATH}\TinyProgrammerMakerIII.exe              HT32 TinyProgrammer Maker III
+    {INSTALL_PATH}\HTEncrypt32.exe                         HT32 Encryption Tool
+    {INSTALL_PATH}\default.ini                             INI file of default setting
+    {INSTALL_PATH}\setting.ini                             INI file of current setting
+    {INSTALL_PATH}\HTEncrypt32.ini                         INI file of current setting for HTEncrypt32
