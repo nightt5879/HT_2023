@@ -84,3 +84,19 @@ I0502 14:43:21.025259 18460 code_page.cpp:268] in function[Unisound::OutputDebug
  
 I0502 14:43:21.026037 18460 code_page.cpp:268] in function[Unisound::OutputDebugPrintf], COM10 ReadSendFile D:\robot\51\Holtek\HT_2023\jx_firm (4)\jx_firm\jx_su_03t_release_update.bin m_iTransferTimes finished 1249 
  
+Log file created at: 2023/05/02 15:34:07  PID: 32540
+Running on machine: LAPTOP-I96IP8BA
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0502 15:34:07.978682   692 code_page.cpp:268] in function[Unisound::OutputDebugPrintf], version: V1.0.1 
+ 
+I0502 15:34:37.258239   692 UniOneDebugToolDlg.cpp:957] in function[CUniOneDebugToolDlg::StartBurn], opening Serial Port 4 
+I0502 15:34:37.261240   692 code_page.cpp:268] in function[Unisound::OutputDebugPrintf], COM put_setting 921600, N, 8, 1 port:4 
+ 
+I0502 15:34:37.784246   692 UniOneDebugToolDlg.cpp:957] in function[CUniOneDebugToolDlg::StartBurn], opening Serial Port 5 
+I0502 15:34:50.600232   692 UniOneDebugToolDlg.cpp:957] in function[CUniOneDebugToolDlg::StartBurn], opening Serial Port 10 
+I0502 15:34:50.622714   692 code_page.cpp:268] in function[Unisound::OutputDebugPrintf], COM put_setting 921600, N, 8, 1 port:10 
+ 
+I0502 15:34:54.195245 16300 code_page.cpp:268] in function[Unisound::OutputDebugPrintf], COM10 XmodermSendFile detected CCC, start send file 
+ 
+I0502 15:34:54.195245 16300 code_page.cpp:268] in function[Unisound::OutputDebugPrintf], COM10 ReadSendFile D:\robot\51\Holtek\HT_2023\su-03t\jx_firm (5)\jx_firm\jx_su_03t_release_update.bin m_iTransferTimes finished 1279 
+ 

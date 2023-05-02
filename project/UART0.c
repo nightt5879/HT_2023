@@ -104,8 +104,8 @@ void UART0_IRQHandler(void)
 unsigned char UART0_analyze_data(void)
 {
 	u8 pos = rxd_comm0.read_pt;
-	if (rxd_comm0.cnt < 4) //  If less than four bytes, it is not necessary.
-		return ERR_SERIAL;
+//	if (rxd_comm0.cnt < 4) //  If less than four bytes, it is not necessary.
+//		return ERR_SERIAL;
 
   // 0x00, 0x00, 0x01, 0x02
 
@@ -134,15 +134,17 @@ unsigned char UART0_analyze_data(void)
     NVIC_EnableIRQ(UART0_IRQn);
 		return FACE_FAILURE;
   }
-  else
-  {
-    // If the received byte does not meet the requirements, increase the reading position by 1 and discard one byte
-    NVIC_DisableIRQ(UART0_IRQn);
-    rxd_comm0.read_pt = (rxd_comm0.read_pt + 1) % UART0_BUF_SIZE;
-    rxd_comm0.cnt--;
-    NVIC_EnableIRQ(UART0_IRQn);
-	return ERR_SERIAL;
-  }
+  return 0;
+//  else
+//  {
+//    // If the received byte does not meet the requirements, increase the reading position by 1 and discard one byte
+//    NVIC_DisableIRQ(UART0_IRQn);
+//    rxd_comm0.read_pt = (rxd_comm0.read_pt + 1) % UART0_BUF_SIZE;
+//    rxd_comm0.cnt--;
+//    NVIC_EnableIRQ(UART0_IRQn);
+//	return ERR_SERIAL;
+//  }
+
 }
 
 //-----------------------------------------------------------------------------

@@ -12,12 +12,10 @@
 
 //---variable---
 u8 data[] = {0x00, 0x00, 00, 0x00};  //Standard data format
-u8 data_battery[] = {0xAA,0x55,0x01,0x00,0x00,0x55,0xAA};  //battery 
-//data_speech[2] = 2;
-//UART1_tx_data(data_speech,sizeof(data_speech));
+u8 data_tem[] = {0xAA,0x55,0x00,0x00,0x00,0x55,0xAA};  //battery 
 u8 data_speech[] = {0xAA,0x55,0x00,0x55,0xAA};  //speech
 unsigned char temperature_10,temperature_time,face_time; 
-u8 press_flag,face_flag,temperature_flag;
+u8 press_flag,face_flag,temperature_flag,face_flag_complete;
 u32 restart_flag;
 float voltage; //Battery level
 //extern_variable
@@ -37,13 +35,9 @@ int main(void)
 	Init();
 	while (1)
 	{
-//		//data_speech[2] = 2;
-//UART1_tx_data(data_speech,sizeof(data_speech));
 		if (gptm0_ct < 10)  //Check if the detection work of a person is completed
 			detect_complete();
-		else if( 9 < gptm0_ct && gptm0_ct < 20) //eceive signal and send data to the slave device
-			broadcast_battery();
-		else if( 19 < gptm0_ct && gptm0_ct < 30) //Read the Rxdata
+		else if( 9 < gptm0_ct && gptm0_ct < 30) //Read the Rxdata
 			cheak_Rxdata();  
 		else if( 29 < gptm0_ct && gptm0_ct < 80) //Check if the key is pressed
 			click_button(); 
@@ -58,24 +52,13 @@ int main(void)
 }
 
 
-void broadcast_battery(void)
-{
-	unsigned char high,low;
-	if(GPIO_ReadInBit(OUT_PB3_GPIO_PORT, OUT_PB3_GPIO_PIN))
-	{
-		high = (unsigned char)(int)voltage;
-		low = (unsigned char)(int)10*(voltage-high);
-		data_battery[3] = high;
-		data_battery[4] = low;
-		UART1_tx_data(data_battery,sizeof(data_battery));  //send the battery voltage
-		data_speech[2] = 2;
-UART1_tx_data(data_speech,sizeof(data_speech));
-	}
-}
 void detect_complete(void)
 {
-	if(face_flag &&temperature_flag)
+	if(face_flag && face_flag_complete)
 	{
+		//send speak signal
+		data_speech[2] = 0x06;
+		UART1_tx_data(data_speech,sizeof(data_speech));
 		//Assign initial value to the variable
 		temperature_time = 0;
 		face_time = 0;
@@ -87,27 +70,46 @@ void detect_complete(void)
 }
 void cheak_Rxdata(void)
 {
-	unsigned char t;
+	unsigned char t = 3;
 	t = UART0_analyze_data();
-	if(t == ERR_SERIAL)
-		__NOP();  //do nothing
-	else if(t == FACE_SUCCESS)
+	if(t == FACE_SUCCESS)
 	{
-		face_flag = 1;
+		face_flag_complete = 1;
+		//send speak signal
+		data_speech[2] = 0x04;
+		UART1_tx_data(data_speech,sizeof(data_speech));
+		GPIO_SetOutBits(HT_GPIOB, GPIO_PIN_8);  //green
+		GPIO_ClearOutBits(HT_GPIOA, GPIO_PIN_2);
+		GPIO_ClearOutBits(HT_GPIOB, GPIO_PIN_7); 		
 	}
 	else if(t == FACE_FAILURE)
 	{
+		face_flag = 0;
+		data_speech[2] = 0x05;
+		//send speak signal
+		UART1_tx_data(data_speech,sizeof(data_speech));
+		GPIO_SetOutBits(HT_GPIOB, GPIO_PIN_7);  //green
+		GPIO_ClearOutBits(HT_GPIOA, GPIO_PIN_2);
+		GPIO_ClearOutBits(HT_GPIOB, GPIO_PIN_8); 
 		face_time++;
 	}
 }
 void temperature_RGB_UART(void)
 {
-	temperature_10 = temperature_measurement();  //actual temperature = temperature_10 / 10 - 20
-	if (temperature_10 > 180) //exceeding the standard temperature
+	unsigned char tem_int,tem_float; 
+	temperature_10 = temperature_measurement() + 22;  //actual temperature = temperature_10 / 10 - 20
+	tem_int = (temperature_10 / 10) + 20;
+	tem_float = temperature_10 % 10;
+	if (temperature_10 > 185) //exceeding the standard temperature
 	{
 		GPIO_SetOutBits(HT_GPIOA, GPIO_PIN_3);  //red
 		GPIO_ClearOutBits(HT_GPIOA, GPIO_PIN_4|GPIO_PIN_5);
 		temperature_time++;
+		//send the temperature data
+		data_tem[2] = 0x02;
+		data_tem[3] = tem_int;
+		data_tem[4] = tem_float;
+		UART1_tx_data(data_tem,sizeof(data_tem));
 	}
 	else if(temperature_10 < 160)  //below the standard temperature
 	{
@@ -116,6 +118,11 @@ void temperature_RGB_UART(void)
 		data_speech[2] = 3;
 		UART1_tx_data(data_speech,sizeof(data_speech));
 		temperature_time++;
+		//send the temperature data
+		data_tem[2] = 0x03;
+		data_tem[3] = tem_int;
+		data_tem[4] = tem_float;
+		UART1_tx_data(data_tem,sizeof(data_tem));
 	}
 	else  //The temperature is normal. UART Sends
 	{
@@ -124,10 +131,10 @@ void temperature_RGB_UART(void)
 		
 		temperature_flag = 1;  //flag
 		//send the temperature data
-		data[1] = 0x01;
-		data[2] = 0x00;
-		data[3] = temperature_10;
-		UART0_tx_data(data,sizeof(data));
+		data_tem[2] = 0x01;
+		data_tem[3] = tem_int;
+		data_tem[4] = tem_float;
+		UART1_tx_data(data_tem,sizeof(data_tem));
 	}
 }
 void click_button(void)
@@ -147,6 +154,9 @@ if(!GPIO_ReadInBit(OUT_PC13_GPIO_PORT, OUT_PC13_GPIO_PIN) || press_flag)
 				face_flag = 1;
 				if(face_time >3)
 				{
+					//send speak signal
+					data_speech[2] = 0x07;
+					UART1_tx_data(data_speech,sizeof(data_speech));
 					//two RGB in blue
 					GPIO_SetOutBits(HT_GPIOA, GPIO_PIN_2|GPIO_PIN_5);
 					GPIO_ClearOutBits(HT_GPIOB, GPIO_PIN_7|GPIO_PIN_8);
@@ -165,6 +175,9 @@ if(!GPIO_ReadInBit(OUT_PC13_GPIO_PORT, OUT_PC13_GPIO_PIN) || press_flag)
 				temperature_RGB_UART();
 				if(temperature_time >3)
 				{
+					//send speak signal
+					data_speech[2] = 0x08;
+					UART1_tx_data(data_speech,sizeof(data_speech));
 					//two RGB in red
 					GPIO_SetOutBits(HT_GPIOA, GPIO_PIN_3);
 					GPIO_SetOutBits(HT_GPIOB, GPIO_PIN_7);
@@ -221,6 +234,7 @@ void Init(void)
 	press_flag = 0;
 	restart_flag = 0; //for restart the main,
 	face_flag = 0;
+	face_flag_complete = 0; //for finish
 	temperature_flag = 0;
 	
 }

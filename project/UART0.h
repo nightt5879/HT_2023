@@ -31,9 +31,9 @@
 //-----------------------------------------------------------------------------
 #define UART0_BUF_SIZE 256
 #define UART0_FIFO_LEN 1
-#define ERR_SERIAL 0
-#define FACE_SUCCESS 1
-#define FACE_FAILURE 2
+//#define ERR_SERIAL 5
+#define FACE_SUCCESS 6
+#define FACE_FAILURE 7
 //-----------------------------------------------------------------------------
 typedef struct
 {
