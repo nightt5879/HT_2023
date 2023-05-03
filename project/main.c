@@ -11,7 +11,7 @@
 //macro definition
 
 //---variable---
-u8 data[] = {0x00, 0x00, 00, 0x00};  //Standard data format
+u8 data[] = {0xAA, 0x00, 00, 0x00};  //Standard data format
 u8 data_tem[] = {0xAA,0x55,0x00,0x00,0x00,0x55,0xAA};  //battery 
 u8 data_speech[] = {0xAA,0x55,0x00,0x55,0xAA};  //speech
 unsigned char temperature_10,temperature_time,face_time; 
