@@ -1,12 +1,46 @@
-*** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\robot\51\keil\ARM\ARMCC\Bin'
-Build target 'HT32'
-compiling system_ht32f5xxxx_01.c...
-"no source": Error:  #5: cannot open source input file "..\system_ht32f5xxxx_01.c": No such file or directory
-..\system_ht32f5xxxx_01.c: 0 warnings, 1 error
-compiling main.c...
-linking...
-Program Size: Code=6720 RO-data=32 RW-data=60 ZI-data=2084  
-FromELF: creating hex file...
-After Build - User command #1: fromelf --bin -o "d:\robot\51\Holtek\HT_2023\project\MDK_ARMv5\HT32\52352\HT32.axf.bin" "d:\robot\51\Holtek\HT_2023\project\MDK_ARMv5\HT32\52352\HT32.axf"
-".\HT32\52352\HT32.axf" - 0 Error(s), 0 Warning(s).
-Build Time Elapsed:  00:00:01
+Load "d:\\robot\\51\\Holtek\\HT_2023\\project\\MDK_ARMv5\\HT32\\52352\\HT32.axf" 
+* JLink Info: Device "ARM7" selected.
+Set JLink Project File to "d:\robot\51\Holtek\HT_2023\project\MDK_ARMv5\JLinkSettings.ini"* JLink Info: Device "HT32F52352" selected.
+
+JLink info:
+------------
+DLL: V7.65b, compiled Apr 20 2022 16:35:15
+Firmware: J-Link OB-STM32F072-CortexM compiled Jan  7 2019 14:09:37
+Hardware: V1.00
+Feature(s) : GDB, RDI, FlashBP, FlashDL, JFlash, RDDI 
+
+* JLink Info: Found SW-DP with ID 0x0BC11477
+* JLink Info: DPv0 detected
+* JLink Info: CoreSight SoC-400 or earlier
+* JLink Info: Scanning AP map to find all available APs
+* JLink Info: AP[1]: Stopped AP scan as end of AP map has been reached
+* JLink Info: AP[0]: AHB-AP (IDR: 0x04770031)
+* JLink Info: Iterating through AP map to find AHB-AP to use
+* JLink Info: AP[0]: Core found
+* JLink Info: AP[0]: AHB-AP ROM base: 0xE00FF000
+* JLink Info: CPUID register: 0x410CC601. Implementer code: 0x41 (ARM)
+* JLink Info: Found Cortex-M0 r0p1, Little endian.
+* JLink Info: FPUnit: 4 code (BP) slots and 0 literal slots
+* JLink Info: CoreSight components:
+* JLink Info: ROMTbl[0] @ E00FF000
+* JLink Info: [0][0]: E000E000 CID B105E00D PID 000BB008 SCS
+* JLink Info: [0][1]: E0001000 CID B105E00D PID 000BB00A DWT
+* JLink Info: [0][2]: E0002000 CID B105E00D PID 000BB00B FPB
+ROMTableAddr = 0xE00FF000
+* JLink Info: Reset: Halt core after reset via DEMCR.VC_CORERESET.
+* JLink Info: Reset: Reset device via AIRCR.SYSRESETREQ.
+
+Target info:
+------------
+Device: HT32F52352
+VTarget = 3.300V
+State of Pins: TCK: 0, TDI: 0, TDO: 1, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 4
+Software-Breakpoints: 8192
+Watchpoints:          2
+JTAG speed: 2000 kHz
+
+Erase Done.Programming Done.Verify OK.* JLink Info: Reset: Halt core after reset via DEMCR.VC_CORERESET.
+* JLink Info: Reset: Reset device via AIRCR.SYSRESETREQ.
+Application running ...
+Flash Load finished at 16:27:32

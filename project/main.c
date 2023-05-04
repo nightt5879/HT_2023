@@ -125,7 +125,7 @@ void temperature_RGB_UART(void)
 		data_tem[2] = 0x02;
 		data_tem[3] = tem_int;
 		data_tem[4] = tem_float;
-		UART0_tx_data(data_tem,sizeof(data_tem));
+		UART1_tx_data(data_tem,sizeof(data_tem));
 	}
 	else if(temperature_10 < 160)  //below the standard temperature
 	{
