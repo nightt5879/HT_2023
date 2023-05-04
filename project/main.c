@@ -41,23 +41,23 @@ int main(void)
 	{
 //		UART0_tx_data(data,sizeof(data));
 //		cheak_Rxdata();  
-UART0_tx_data(data,sizeof(data));
-// 		if (gptm0_ct < 10)  //Check if the detection work of a person is completed
-// 			detect_complete();
-// 		else if( 9 < gptm0_ct && gptm0_ct < 30) //Read the Rxdata
-// 			__NOP();
-// //			cheak_Rxdata();  
-// 		else if( 29 < gptm0_ct && gptm0_ct < 80) //Check if the key is pressed
-// 			click_button(); 
-// 		else if(79 < gptm0_ct && gptm0_ct < 90) //Restart main function by long press 
-// 		{
-// 			if(restart_flag > 10000)  
-// 				main();
-// 		}
-// 		else if(gptm0_ct > 89)  //battery level
-// 			battery_indicator();
+		if (gptm0_ct < 10)  //Check if the detection work of a person is completed
+			detect_complete();
+		else if( 9 < gptm0_ct && gptm0_ct < 30) //Read the Rxdata
+			__NOP();
+//			cheak_Rxdata();  
+		else if( 29 < gptm0_ct && gptm0_ct < 80) //Check if the key is pressed
+			click_button(); 
+		else if(79 < gptm0_ct && gptm0_ct < 90) //Restart main function by long press 
+		{
+			if(restart_flag > 10000)  
+				main();
+		}
+		else if(gptm0_ct > 89)  //battery level
+			battery_indicator();
 	}
 }
+
 
 
 void detect_complete(void)
