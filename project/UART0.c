@@ -22,11 +22,19 @@
 //Build by HT32init V1.09.20.506Beta
 //-----------------------------------------------------------------------------
 #include "UART0.h"
+#include "UART1.h"
+#include "GPIO.h"
+#include "LED.h"
 
 //-----------------------------------------------------------------------------
 __ALIGN4 _UART0_STRUCT rxd_comm0;
 __ALIGN4 _UART0_STRUCT txd_comm0;
 
+u8 data_speechh[] = {0xAA,0x55,0x00,0x55,0xAA};  //speech
+void UART0_tx_data(u8 *pt, u8 len);
+extern u8 face_flag_complete;
+extern u8 face_flag;
+extern unsigned char face_time;
 //-----------------------------------------------------------------------------
 void UART0_Configuration(void)
 {
@@ -65,10 +73,12 @@ void UART0_init_buffer (void)
   txd_comm0.write_pt = 0;
   txd_comm0.cnt = 0;
 }
+uint8_t dataa[] = {0x01,0x02};
 
 //-----------------------------------------------------------------------------
 void UART0_IRQHandler(void)
 {
+	u8 data;
   // Tx, move data from buffer to UART FIFO
   if ((HT_UART0->SR) & USART_FLAG_TXC)
   {
@@ -91,50 +101,119 @@ void UART0_IRQHandler(void)
   }
 
   // Rx, move data from UART FIFO to buffer
-  if ((HT_UART0->SR) & USART_FLAG_RXDR )
-  {
-    rxd_comm0.buffer[rxd_comm0.write_pt] = USART_ReceiveData(HT_UART0);
+  	if( USART_GetFlagStatus(HT_UART0, USART_FLAG_RXDR ) )         //????
+	{
+		data = USART_ReceiveData(HT_UART0);                         
+		if (data == 0x01)
+		{
+	//		UART0_tx_data(data,sizeof(data));
+			face_flag_complete = 1;
+			//send speak signal
+			data_speechh[2] = 0x04;
+			UART1_tx_data(data_speechh,sizeof(data_speechh));
+			GPIO_SetOutBits(HT_GPIOB, GPIO_PIN_8);  //green
+			GPIO_ClearOutBits(HT_GPIOA, GPIO_PIN_2);
+			GPIO_ClearOutBits(HT_GPIOB, GPIO_PIN_7); 		
+		}
+	else if(data == 0x00)
+		{
+			face_flag = 0;
+			data_speechh[2] = 0x05;
+			//send speak signal
+			UART1_tx_data(data_speechh,sizeof(data_speechh));
+			GPIO_SetOutBits(HT_GPIOB, GPIO_PIN_7);  //red
+			GPIO_ClearOutBits(HT_GPIOA, GPIO_PIN_2);
+			GPIO_ClearOutBits(HT_GPIOB, GPIO_PIN_8); 
+			face_time++;
+		}
 
-    rxd_comm0.write_pt = (rxd_comm0.write_pt + 1) % UART0_BUF_SIZE;
-    rxd_comm0.cnt++;
-  }
+			
+//		printf("data = %c\n",data);                                  //???????????		
+//		UART0_tx_data(dataa,sizeof(dataa));
+	}
+//  if ((HT_UART0->SR) & USART_FLAG_RXDR )
+//  {
+//    rxd_comm0.buffer[rxd_comm0.write_pt] = USART_ReceiveData(HT_UART0);
+
+//    rxd_comm0.write_pt = (rxd_comm0.write_pt + 1) % UART0_BUF_SIZE;
+//    rxd_comm0.cnt++;
+//  }
 }
 
 //-----------------------------------------------------------------------------
 unsigned char UART0_analyze_data(void)
 {
-	u8 pos = rxd_comm0.read_pt;
-//	if (rxd_comm0.cnt < 4) //  If less than four bytes, it is not necessary.
-//		return ERR_SERIAL;
+  u8 pos = rxd_comm0.read_pt;
 
-  // 0x00, 0x00, 0x01, 0x02
-
-  if (rxd_comm0.buffer[pos] == 0x00 && 
-      rxd_comm0.buffer[(pos + 1) % UART0_BUF_SIZE] == 0x03 &&
-      rxd_comm0.buffer[(pos + 2) % UART0_BUF_SIZE] == 0x01 && //face detect success
-      rxd_comm0.buffer[(pos + 3) % UART0_BUF_SIZE] == 0x00)
+  while (rxd_comm0.cnt >= 4)
   {
-
-    // Update the reading position and counter of the receive buffer.
-    NVIC_DisableIRQ(UART0_IRQn);
-    rxd_comm0.read_pt = (rxd_comm0.read_pt + 4) % UART0_BUF_SIZE;
-    rxd_comm0.cnt -= 4;
-    NVIC_EnableIRQ(UART0_IRQn);
-		return FACE_SUCCESS;
-  }
-   else if (rxd_comm0.buffer[pos] == 0x00 && 
-      rxd_comm0.buffer[(pos + 1) % UART0_BUF_SIZE] == 0x03 &&
-      rxd_comm0.buffer[(pos + 2) % UART0_BUF_SIZE] == 0x00 && //face detect failure
-      rxd_comm0.buffer[(pos + 3) % UART0_BUF_SIZE] == 0x00)
-  {
-    // Update the reading position and counter of the receive buffer.
-    NVIC_DisableIRQ(UART0_IRQn);
-    rxd_comm0.read_pt = (rxd_comm0.read_pt + 4) % UART0_BUF_SIZE;
-    rxd_comm0.cnt -= 4;
-    NVIC_EnableIRQ(UART0_IRQn);
-		return FACE_FAILURE;
+    if (rxd_comm0.buffer[pos] == 0x01 && 
+        rxd_comm0.buffer[(pos + 1) % UART0_BUF_SIZE] == 0x03 &&
+        rxd_comm0.buffer[(pos + 2) % UART0_BUF_SIZE] == 0x01 && //face detect success
+        rxd_comm0.buffer[(pos + 3) % UART0_BUF_SIZE] == 0x00)
+    {
+      NVIC_DisableIRQ(UART0_IRQn);
+      rxd_comm0.read_pt = (rxd_comm0.read_pt + 4) % UART0_BUF_SIZE;
+      rxd_comm0.cnt -= 4;
+      NVIC_EnableIRQ(UART0_IRQn);
+      return FACE_SUCCESS;
+    }
+    else if (rxd_comm0.buffer[pos] == 0x01 && 
+             rxd_comm0.buffer[(pos + 1) % UART0_BUF_SIZE] == 0x03 &&
+             rxd_comm0.buffer[(pos + 2) % UART0_BUF_SIZE] == 0x00 && //face detect failure
+             rxd_comm0.buffer[(pos + 3) % UART0_BUF_SIZE] == 0x00)
+    {
+      NVIC_DisableIRQ(UART0_IRQn);
+      rxd_comm0.read_pt = (rxd_comm0.read_pt + 4) % UART0_BUF_SIZE;
+      rxd_comm0.cnt -= 4;
+      NVIC_EnableIRQ(UART0_IRQn);
+      return FACE_FAILURE;
+    }
+    else
+    {
+      // Discard one byte if the data does not meet the requirements
+      NVIC_DisableIRQ(UART0_IRQn);
+      rxd_comm0.read_pt = (rxd_comm0.read_pt + 1) % UART0_BUF_SIZE;
+      rxd_comm0.cnt--;
+      NVIC_EnableIRQ(UART0_IRQn);
+      pos = rxd_comm0.read_pt;
+    }
   }
   return 0;
+}
+
+	//u8 pos = rxd_comm0.read_pt;
+	////	if (rxd_comm0.cnt < 4) //  If less than four bytes, it is not necessary.
+	////		return ERR_SERIAL;
+
+	//// 0x00, 0x00, 0x01, 0x02
+
+	//if (rxd_comm0.buffer[pos] == 0x01 && 
+	//  rxd_comm0.buffer[(pos + 1) % UART0_BUF_SIZE] == 0x03 &&
+	//  rxd_comm0.buffer[(pos + 2) % UART0_BUF_SIZE] == 0x01 && //face detect success
+	//  rxd_comm0.buffer[(pos + 3) % UART0_BUF_SIZE] == 0x00)
+	//{
+
+	//// Update the reading position and counter of the receive buffer.
+	//NVIC_DisableIRQ(UART0_IRQn);
+	//rxd_comm0.read_pt = (rxd_comm0.read_pt + 4) % UART0_BUF_SIZE;
+	//rxd_comm0.cnt -= 4;
+	//NVIC_EnableIRQ(UART0_IRQn);
+	//	return FACE_SUCCESS;
+	//}
+	//else if (rxd_comm0.buffer[pos] == 0x01 && 
+	//  rxd_comm0.buffer[(pos + 1) % UART0_BUF_SIZE] == 0x03 &&
+	//  rxd_comm0.buffer[(pos + 2) % UART0_BUF_SIZE] == 0x00 && //face detect failure
+	//  rxd_comm0.buffer[(pos + 3) % UART0_BUF_SIZE] == 0x00)
+	//{
+	//// Update the reading position and counter of the receive buffer.
+	//NVIC_DisableIRQ(UART0_IRQn);
+	//rxd_comm0.read_pt = (rxd_comm0.read_pt + 4) % UART0_BUF_SIZE;
+	//rxd_comm0.cnt -= 4;
+	//NVIC_EnableIRQ(UART0_IRQn);
+	//	return FACE_FAILURE;
+	//}
+	//return 0;
 //  else
 //  {
 //    // If the received byte does not meet the requirements, increase the reading position by 1 and discard one byte
@@ -145,7 +224,6 @@ unsigned char UART0_analyze_data(void)
 //	return ERR_SERIAL;
 //  }
 
-}
 
 //-----------------------------------------------------------------------------
 void UART0_tx_data(u8 *pt, u8 len)

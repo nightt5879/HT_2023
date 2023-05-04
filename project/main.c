@@ -18,8 +18,12 @@ unsigned char temperature_10,temperature_time,face_time;
 u8 press_flag,face_flag,temperature_flag,face_flag_complete;
 u32 restart_flag;
 float voltage; //Battery level
+	unsigned char t = 3;
 //extern_variable
 extern vu32 gptm0_ct;
+extern u8 face_flag_complete;
+extern u8 face_flag;
+extern unsigned char face_time;
 //---function----
 void Init(void);
 static void delay_us(u32 count); //__nop == 1/48us?
@@ -35,10 +39,13 @@ int main(void)
 	Init();
 	while (1)
 	{
+//		UART0_tx_data(data,sizeof(data));
+//		cheak_Rxdata();  
 		if (gptm0_ct < 10)  //Check if the detection work of a person is completed
 			detect_complete();
 		else if( 9 < gptm0_ct && gptm0_ct < 30) //Read the Rxdata
-			cheak_Rxdata();  
+			__NOP();
+//			cheak_Rxdata();  
 		else if( 29 < gptm0_ct && gptm0_ct < 80) //Check if the key is pressed
 			click_button(); 
 		else if(79 < gptm0_ct && gptm0_ct < 90) //Restart main function by long press 
@@ -54,8 +61,16 @@ int main(void)
 
 void detect_complete(void)
 {
-	if(face_flag && face_flag_complete)
+	if(temperature_flag && face_flag_complete)
 	{
+		//two green
+		GPIO_SetOutBits(HT_GPIOB, GPIO_PIN_8);  //green
+		GPIO_ClearOutBits(HT_GPIOA, GPIO_PIN_2);
+		GPIO_ClearOutBits(HT_GPIOB, GPIO_PIN_7); 
+		
+		GPIO_SetOutBits(HT_GPIOA, GPIO_PIN_4);  //green
+		GPIO_ClearOutBits(HT_GPIOA, GPIO_PIN_3|GPIO_PIN_5);
+		
 		//send speak signal
 		data_speech[2] = 0x06;
 		UART1_tx_data(data_speech,sizeof(data_speech));
@@ -70,10 +85,10 @@ void detect_complete(void)
 }
 void cheak_Rxdata(void)
 {
-	unsigned char t = 3;
 	t = UART0_analyze_data();
 	if(t == FACE_SUCCESS)
 	{
+//		UART0_tx_data(data,sizeof(data));
 		face_flag_complete = 1;
 		//send speak signal
 		data_speech[2] = 0x04;
@@ -88,7 +103,7 @@ void cheak_Rxdata(void)
 		data_speech[2] = 0x05;
 		//send speak signal
 		UART1_tx_data(data_speech,sizeof(data_speech));
-		GPIO_SetOutBits(HT_GPIOB, GPIO_PIN_7);  //green
+		GPIO_SetOutBits(HT_GPIOB, GPIO_PIN_7);  //red
 		GPIO_ClearOutBits(HT_GPIOA, GPIO_PIN_2);
 		GPIO_ClearOutBits(HT_GPIOB, GPIO_PIN_8); 
 		face_time++;
@@ -109,7 +124,7 @@ void temperature_RGB_UART(void)
 		data_tem[2] = 0x02;
 		data_tem[3] = tem_int;
 		data_tem[4] = tem_float;
-		UART1_tx_data(data_tem,sizeof(data_tem));
+		UART0_tx_data(data_tem,sizeof(data_tem));
 	}
 	else if(temperature_10 < 160)  //below the standard temperature
 	{
@@ -135,6 +150,7 @@ void temperature_RGB_UART(void)
 		data_tem[3] = tem_int;
 		data_tem[4] = tem_float;
 		UART1_tx_data(data_tem,sizeof(data_tem));
+		UART0_tx_data(data_tem,sizeof(data_tem));
 	}
 }
 void click_button(void)
@@ -168,6 +184,7 @@ if(!GPIO_ReadInBit(OUT_PC13_GPIO_PORT, OUT_PC13_GPIO_PIN) || press_flag)
 					data[1] = 0x02;
 					data[2] = 0x00;
 					data[3] = 0x00;
+					UART0_tx_data(data, sizeof(data));
 				}
 			}
 			else

@@ -43,3 +43,6 @@
 .\ht32\52352\uart0.o: ..\..\library\HT32F5xxxx_Driver\inc\ht32_serial.h
 .\ht32\52352\uart0.o: ..\..\library\HT32F5xxxx_Driver\inc\ht32_div.h
 .\ht32\52352\uart0.o: ..\..\library\HT32F5xxxx_Driver\inc\ht32_rand.h
+.\ht32\52352\uart0.o: ..\UART1.h
+.\ht32\52352\uart0.o: ..\GPIO.h
+.\ht32\52352\uart0.o: ..\LED.h

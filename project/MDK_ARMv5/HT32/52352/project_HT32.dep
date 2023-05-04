@@ -42,7 +42,7 @@ I (..\..\library\HT32F5xxxx_Driver\inc\ht32_cm0plus_misc.h)(0x574D2640)
 I (..\..\library\HT32F5xxxx_Driver\inc\ht32_serial.h)(0x5DCD32CE)
 I (..\..\library\HT32F5xxxx_Driver\inc\ht32_div.h)(0x56C22A04)
 I (..\..\library\HT32F5xxxx_Driver\inc\ht32_rand.h)(0x57B1BC8E)
-F (..\main.c)(0x6450C5C7)(-c --cpu Cortex-M0+ -D__EVAL -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ..\ -I ..\..\library\CMSIS\Include -I ..\..\library\Device\Holtek\HT32F5xxxx\Include -I ..\..\library\HT32F5xxxx_Driver\inc -I ..\..\library\HT32_USBD_Library\inc -I ..\..\utilities-I.\RTE\_HT32-ID:\robot\51\keil\ARM\PACK\Holtek\HT32_DFP\1.0.44\ARM\INC\Holtek\HT32F5xxxx-ID:\robot\51\keil\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DUSE_HT32F52342_52 -DUSE_HT32_DRIVER -DUSE_HT32F52352_SK -DUSE_HT32F52342_52 -DUSE_MEM_HT32F52352-o .\ht32\52352\main.o --omf_browse .\ht32\52352\main.crf --depend .\ht32\52352\main.d)
+F (..\main.c)(0x64527883)(-c --cpu Cortex-M0+ -D__EVAL -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ..\ -I ..\..\library\CMSIS\Include -I ..\..\library\Device\Holtek\HT32F5xxxx\Include -I ..\..\library\HT32F5xxxx_Driver\inc -I ..\..\library\HT32_USBD_Library\inc -I ..\..\utilities-I.\RTE\_HT32-ID:\robot\51\keil\ARM\PACK\Holtek\HT32_DFP\1.0.44\ARM\INC\Holtek\HT32F5xxxx-ID:\robot\51\keil\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DUSE_HT32F52342_52 -DUSE_HT32_DRIVER -DUSE_HT32F52352_SK -DUSE_HT32F52342_52 -DUSE_MEM_HT32F52352-o .\ht32\52352\main.o --omf_browse .\ht32\52352\main.crf --depend .\ht32\52352\main.d)
 I (..\..\library\HT32F5xxxx_Driver\inc\ht32.h)(0x59959B2A)
 I (..\..\library\Device\Holtek\HT32F5xxxx\Include\ht32f5xxxx_01.h)(0x5DD50366)
 I (..\..\library\HT32F5xxxx_Driver\inc\ht32_config.h)(0x5DCD42DC)
@@ -88,7 +88,7 @@ I (..\..\library\HT32F5xxxx_Driver\inc\ht32_rand.h)(0x57B1BC8E)
 I (..\GPIO.h)(0x6450685D)
 I (..\BFTM0.h)(0x644FCFA7)
 I (..\ADC.h)(0x644FD2E6)
-I (..\UART0.h)(0x6450C001)
+I (..\UART0.h)(0x64526C68)
 I (..\UART1.h)(0x644FCFA7)
 I (..\GPTM0.h)(0x644FCFA7)
 I (..\LED.h)(0x644CF116)
@@ -225,8 +225,8 @@ I (..\..\library\HT32F5xxxx_Driver\inc\ht32_cm0plus_misc.h)(0x574D2640)
 I (..\..\library\HT32F5xxxx_Driver\inc\ht32_serial.h)(0x5DCD32CE)
 I (..\..\library\HT32F5xxxx_Driver\inc\ht32_div.h)(0x56C22A04)
 I (..\..\library\HT32F5xxxx_Driver\inc\ht32_rand.h)(0x57B1BC8E)
-F (..\UART0.c)(0x6450C028)(-c --cpu Cortex-M0+ -D__EVAL -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ..\ -I ..\..\library\CMSIS\Include -I ..\..\library\Device\Holtek\HT32F5xxxx\Include -I ..\..\library\HT32F5xxxx_Driver\inc -I ..\..\library\HT32_USBD_Library\inc -I ..\..\utilities-I.\RTE\_HT32-ID:\robot\51\keil\ARM\PACK\Holtek\HT32_DFP\1.0.44\ARM\INC\Holtek\HT32F5xxxx-ID:\robot\51\keil\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DUSE_HT32F52342_52 -DUSE_HT32_DRIVER -DUSE_HT32F52352_SK -DUSE_HT32F52342_52 -DUSE_MEM_HT32F52352-o .\ht32\52352\uart0.o --omf_browse .\ht32\52352\uart0.crf --depend .\ht32\52352\uart0.d)
-I (..\UART0.h)(0x6450C001)
+F (..\UART0.c)(0x645275F4)(-c --cpu Cortex-M0+ -D__EVAL -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ..\ -I ..\..\library\CMSIS\Include -I ..\..\library\Device\Holtek\HT32F5xxxx\Include -I ..\..\library\HT32F5xxxx_Driver\inc -I ..\..\library\HT32_USBD_Library\inc -I ..\..\utilities-I.\RTE\_HT32-ID:\robot\51\keil\ARM\PACK\Holtek\HT32_DFP\1.0.44\ARM\INC\Holtek\HT32F5xxxx-ID:\robot\51\keil\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DUSE_HT32F52342_52 -DUSE_HT32_DRIVER -DUSE_HT32F52352_SK -DUSE_HT32F52342_52 -DUSE_MEM_HT32F52352-o .\ht32\52352\uart0.o --omf_browse .\ht32\52352\uart0.crf --depend .\ht32\52352\uart0.d)
+I (..\UART0.h)(0x64526C68)
 I (..\..\library\HT32F5xxxx_Driver\inc\ht32.h)(0x59959B2A)
 I (..\..\library\Device\Holtek\HT32F5xxxx\Include\ht32f5xxxx_01.h)(0x5DD50366)
 I (..\..\library\HT32F5xxxx_Driver\inc\ht32_config.h)(0x5DCD42DC)
@@ -269,6 +269,9 @@ I (..\..\library\HT32F5xxxx_Driver\inc\ht32_cm0plus_misc.h)(0x574D2640)
 I (..\..\library\HT32F5xxxx_Driver\inc\ht32_serial.h)(0x5DCD32CE)
 I (..\..\library\HT32F5xxxx_Driver\inc\ht32_div.h)(0x56C22A04)
 I (..\..\library\HT32F5xxxx_Driver\inc\ht32_rand.h)(0x57B1BC8E)
+I (..\UART1.h)(0x644FCFA7)
+I (..\GPIO.h)(0x6450685D)
+I (..\LED.h)(0x644CF116)
 F (..\UART1.c)(0x644FCFA7)(-c --cpu Cortex-M0+ -D__EVAL -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ..\ -I ..\..\library\CMSIS\Include -I ..\..\library\Device\Holtek\HT32F5xxxx\Include -I ..\..\library\HT32F5xxxx_Driver\inc -I ..\..\library\HT32_USBD_Library\inc -I ..\..\utilities-I.\RTE\_HT32-ID:\robot\51\keil\ARM\PACK\Holtek\HT32_DFP\1.0.44\ARM\INC\Holtek\HT32F5xxxx-ID:\robot\51\keil\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DUSE_HT32F52342_52 -DUSE_HT32_DRIVER -DUSE_HT32F52352_SK -DUSE_HT32F52342_52 -DUSE_MEM_HT32F52352-o .\ht32\52352\uart1.o --omf_browse .\ht32\52352\uart1.crf --depend .\ht32\52352\uart1.d)
 I (..\UART1.h)(0x644FCFA7)
 I (..\..\library\HT32F5xxxx_Driver\inc\ht32.h)(0x59959B2A)
