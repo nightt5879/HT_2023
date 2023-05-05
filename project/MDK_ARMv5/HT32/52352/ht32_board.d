@@ -6,13 +6,13 @@
 .\ht32\52352\ht32_board.o: ..\..\library\HT32F5xxxx_Driver\inc\ht32.h
 .\ht32\52352\ht32_board.o: ..\..\library\Device\Holtek\HT32F5xxxx\Include\ht32f5xxxx_01.h
 .\ht32\52352\ht32_board.o: ..\..\library\CMSIS\Include\core_cm0plus.h
-.\ht32\52352\ht32_board.o: D:\robot\51\keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\ht32\52352\ht32_board.o: E:\robot\51\keil\keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\ht32\52352\ht32_board.o: ..\..\library\CMSIS\Include\core_cmInstr.h
 .\ht32\52352\ht32_board.o: ..\..\library\CMSIS\Include\core_cmFunc.h
 .\ht32\52352\ht32_board.o: ..\..\library\Device\Holtek\HT32F5xxxx\Include\system_ht32f5xxxx_01.h
 .\ht32\52352\ht32_board.o: ..\..\library\HT32F5xxxx_Driver\inc\ht32f5xxxx_lib.h
 .\ht32\52352\ht32_board.o: ..\..\library\HT32F5xxxx_Driver\inc\ht32f52342_52_libcfg.h
-.\ht32\52352\ht32_board.o: D:\robot\51\keil\ARM\ARMCC\Bin\..\include\stdio.h
+.\ht32\52352\ht32_board.o: E:\robot\51\keil\keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\ht32\52352\ht32_board.o: ..\ht32f5xxxx_conf.h
 .\ht32\52352\ht32_board.o: ..\..\library\HT32F5xxxx_Driver\inc\ht32f5xxxx_adc.h
 .\ht32\52352\ht32_board.o: ..\..\library\HT32F5xxxx_Driver\inc\ht32.h

@@ -41,7 +41,7 @@
 ".\ht32\52352\ht32f5xxxx_cmp.o"
 ".\ht32\52352\ht32f5xxxx_ebi.o"
 ".\ht32\52352\ht32f5xxxx_i2s.o"
---library_type=microlib --ro-base 0x00000000 --entry 0x00000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict
+--library_type=microlib --ro-base 0x00000000 --entry 0x00000000 --rw-base 0x20000000 --strict
 --entry Reset_Handler --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\HT32\52352\HT32.map" -o .\HT32\52352\HT32.axf
