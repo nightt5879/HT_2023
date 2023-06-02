@@ -20,7 +20,7 @@ PCB原理图（嘉立创EDA专业版）
 程序后期好像有烧录不了之类的奇怪问题，backup里为最后比赛前烧录的程序.
 ### 2.7 其他
  由于该项目由多人参与并且未放到同一个项目里面<br>
- 有关小程序、8266、ESP32-CAM、人脸识别的代码移步[这里](https://github.com/caiyilian/holtekFaceRecognition0)进行了解
+ 有关小程序、8266、ESP32-CAM、人脸识别的代码移步[这里](https://github.com/caiyilian/holtekFaceRecognition)进行了解
 
  ## 3 使用说明
  把HT32,8266,ESP32-CAM,su-03t,烧录进入设备，最后进行热点连接配置完成就可以使用<br>
