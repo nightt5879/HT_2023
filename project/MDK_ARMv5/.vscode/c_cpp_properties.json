@@ -3,18 +3,20 @@
         {
             "name": "HT32",
             "includePath": [
-                "d:\\robot\\51\\Holtek\\HT_2023\\project\\",
-                "d:\\robot\\51\\Holtek\\HT_2023\\library\\CMSIS\\Include",
-                "d:\\robot\\51\\Holtek\\HT_2023\\library\\Device\\Holtek\\HT32F5xxxx\\Include",
-                "d:\\robot\\51\\Holtek\\HT_2023\\library\\HT32F5xxxx_Driver\\inc",
-                "d:\\robot\\51\\Holtek\\HT_2023\\library\\HT32_USBD_Library\\inc",
-                "d:\\robot\\51\\Holtek\\HT_2023\\utilities",
-                "D:\\robot\\51\\keil\\ARM\\ARMCC\\include",
-                "D:\\robot\\51\\keil\\ARM\\ARMCC\\include\\rw",
-                "d:\\robot\\51\\Holtek\\HT_2023\\project",
-                "d:\\robot\\51\\Holtek\\HT_2023\\project\\MDK_ARMv5",
-                "d:\\robot\\51\\Holtek\\HT_2023\\library\\HT32F5xxxx_Driver\\src",
-                "d:\\robot\\51\\Holtek\\HT_2023\\utilities\\common"
+                "e:\\robot\\51\\Holtek\\HT_2023\\project\\",
+                "e:\\robot\\51\\Holtek\\HT_2023\\library\\CMSIS\\Include",
+                "e:\\robot\\51\\Holtek\\HT_2023\\library\\Device\\Holtek\\HT32F5xxxx\\Include",
+                "e:\\robot\\51\\Holtek\\HT_2023\\library\\HT32F5xxxx_Driver\\inc",
+                "e:\\robot\\51\\Holtek\\HT_2023\\library\\HT32_USBD_Library\\inc",
+                "e:\\robot\\51\\Holtek\\HT_2023\\utilities",
+                "E:\\robot\\51\\keil\\keil_v5\\ARM\\ARMCC\\include",
+                "E:\\robot\\51\\keil\\keil_v5\\ARM\\ARMCC\\include\\arm_linux",
+                "E:\\robot\\51\\keil\\keil_v5\\ARM\\ARMCC\\include\\arm_linux_compat",
+                "E:\\robot\\51\\keil\\keil_v5\\ARM\\ARMCC\\include\\rw",
+                "e:\\robot\\51\\Holtek\\HT_2023\\project",
+                "e:\\robot\\51\\Holtek\\HT_2023\\project\\MDK_ARMv5",
+                "e:\\robot\\51\\Holtek\\HT_2023\\library\\HT32F5xxxx_Driver\\src",
+                "e:\\robot\\51\\Holtek\\HT_2023\\utilities\\common"
             ],
             "defines": [
                 "USE_HT32_DRIVER",
